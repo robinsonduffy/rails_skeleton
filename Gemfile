@@ -5,9 +5,25 @@ gem 'rails', '3.0.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+group :development do
+  gem 'sqlite3'
+  gem 'rspec-rails'
+end
 
-# Use unicorn as the web server
+group :test do
+  gem 'sqlite3'
+  gem 'rspec-rails'
+end
+
+group :production do
+  gem 'pg'
+end
+
+gem "haml", ">= 3.0.0"
+gem "haml-rails"
+gem "jquery-rails"
+
+#Use unicorn as the web server
 # gem 'unicorn'
 
 # Deploy with Capistrano
@@ -29,7 +45,4 @@ gem 'sqlite3'
 # group :development, :test do
 #   gem 'webrat'
 # end
-gem "haml", ">= 3.0.0"
-gem "haml-rails"
-gem "jquery-rails"
-gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
+
