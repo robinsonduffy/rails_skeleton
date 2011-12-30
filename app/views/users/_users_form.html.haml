@@ -1,0 +1,12 @@
+= form_for @user do |f|
+  %div.form-field
+    = f.label :email
+    = f.text_field :email
+  %div.form-field
+    = f.label :password
+    = f.password_field :password
+  %div.form-field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+  %div.form-actions
+    = f.submit "#{action} User"
