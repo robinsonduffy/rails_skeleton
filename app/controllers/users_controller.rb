@@ -7,8 +7,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to root_url, :notice => "Signed up!"
+      flash[:success] = "Created User (#{@user.email})"
+      redirect_to users_path
     else
+      @title = "Create New User"
       render :new
     end
   end
