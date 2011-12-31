@@ -4,7 +4,7 @@ Stampson::Application.routes.draw do
   
   get "sessions/new"
 
-  resources :users
+  resources :users, :except => [:show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

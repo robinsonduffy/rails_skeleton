@@ -74,12 +74,11 @@ describe UsersController do
     
     it "should list all the current users" do
       get :index
-      response.should have_selector("a", :content => @user1.email, :href => user_path(@user1))
-      response.should have_selector("a", :content => @user2.email, :href => user_path(@user2))
-      response.should have_selector("a", :content => @user3.email, :href => user_path(@user3))
+      response.should have_selector("a", :content => @user1.email, :href => edit_user_path(@user1))
+      response.should have_selector("a", :content => @user2.email, :href => edit_user_path(@user2))
+      response.should have_selector("a", :content => @user3.email, :href => edituser_path(@user3))
     end
     
   end
   
-
 end
