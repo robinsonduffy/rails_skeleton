@@ -5,8 +5,10 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, 
                        :confirmation => {:on => :create}, 
                        :length => {:within => 6..40}
-  
+                       
+  email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/
   validates :email, :presence => true, 
-                    :uniqueness => {:case_sensitve => false}
+                    :uniqueness => {:case_sensitve => false},
+                    :format => { :with => email_regex }
                     
 end
