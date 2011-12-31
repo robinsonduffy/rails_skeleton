@@ -54,5 +54,32 @@ describe UsersController do
       end
     end
   end
+  
+  describe "GET 'index'" do
+    before(:each) do
+      @user1 = Factory(:user, :email => Factory.next(:email))
+      @user2 = Factory(:user, :email => Factory.next(:email))
+      @user3 = Factory(:user, :email => Factory.next(:email))
+    end
+    
+    it "should be success" do
+      get :index
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :index
+      response.should have_selector("title", :content => "Users")
+    end
+    
+    it "should list all the current users" do
+      get :index
+      response.should have_selector("a", :content => @user1.email, :href => user_path(@user1))
+      response.should have_selector("a", :content => @user2.email, :href => user_path(@user2))
+      response.should have_selector("a", :content => @user3.email, :href => user_path(@user3))
+    end
+    
+  end
+  
 
 end

@@ -14,4 +14,10 @@ class UsersController < ApplicationController
       render :new
     end
   end
+  
+  def index
+    @users = User.all
+    @title = "Users"
+  end
+  
 end
