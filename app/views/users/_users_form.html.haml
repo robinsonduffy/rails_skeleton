@@ -9,5 +9,9 @@
   %div.form-field
     = f.label :password_confirmation
     = f.password_field :password_confirmation
+  - if action == "Update"
+    %div.form-field
+      = f.label :admin
+      = f.check_box :admin
   %div.form-actions
     = f.submit "#{action} User"

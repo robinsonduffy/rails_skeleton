@@ -7,6 +7,11 @@ describe UsersController do
       get :new
       response.should have_selector("title", :content => "Create New User")
     end
+    
+    it "should NOT have the admin checkbox" do
+      get :new
+      response.should_not have_selector("input", :type => "checkbox", :name => "user[admin]")
+    end
   end
   
   describe "POST 'create'" do
@@ -76,9 +81,73 @@ describe UsersController do
       get :index
       response.should have_selector("a", :content => @user1.email, :href => edit_user_path(@user1))
       response.should have_selector("a", :content => @user2.email, :href => edit_user_path(@user2))
-      response.should have_selector("a", :content => @user3.email, :href => edituser_path(@user3))
+      response.should have_selector("a", :content => @user3.email, :href => edit_user_path(@user3))
     end
     
   end
   
+  describe "GET 'edit'" do
+    before(:each) do
+      @user = Factory(:user)
+    end
+    
+    it "should be success" do
+      get :edit, :id => @user
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :edit, :id => @user
+      response.should have_selector("title", :content => "Edit User")
+    end
+    
+    it "should have the admin checkbox" do
+      get :edit, :id => @user
+      response.should have_selector("input", :type => 'checkbox', :name => 'user[admin]')
+    end
+  end
+  
+  describe "PUT 'update'" do
+    before(:each) do
+      @user = Factory(:user)
+    end
+    
+    describe "failure" do
+      before(:each) do
+        @attr = {:email => "", :password => "foobar", :password_confirmation => "boofar"}
+      end
+      
+      it "should render the edit form again" do
+        put :update, :id => @user, :user => @attr 
+        response.should render_template(:edit)
+      end
+      
+      it "should have the right title" do
+        put :update, :id => @user, :user => @attr
+        response.should have_selector("title", :content => "Edit User")
+      end
+    end
+    
+    describe "success" do
+      before(:each) do
+        @attr = {:email => "change@email.com", :password => "foobar", :password_confirmation => "foobar"}
+      end
+      
+      it "should redirect to the user index" do
+        put :update, :id => @user, :user => @attr
+        response.should redirect_to(users_path)
+      end
+      
+      it "should display a success message" do
+        put :update, :id => @user, :user => @attr
+        flash[:success] =~ /updated/i
+      end
+      
+      it "should update the users info" do
+        put :update, :id => @user, :user => @attr
+        @user.reload
+        @user.email.should == @attr[:email]
+      end
+    end
+  end
 end
