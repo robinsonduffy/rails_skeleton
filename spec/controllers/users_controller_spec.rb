@@ -105,6 +105,11 @@ describe UsersController do
       get :edit, :id => @user
       response.should have_selector("input", :type => 'checkbox', :name => 'user[admin]')
     end
+    
+    it "should have a delete link" do
+      get :edit, :id => @user
+      response.should have_selector("a", :content => "Delete User")
+    end
   end
   
   describe "PUT 'update'" do
@@ -148,6 +153,28 @@ describe UsersController do
         @user.reload
         @user.email.should == @attr[:email]
       end
+    end
+  end
+  
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      @user = Factory(:user)
+    end
+    
+    it "should delete the user" do
+      lambda do
+        delete :destroy, :id => @user
+      end.should change(User, :count).by(-1)
+    end
+    
+    it "should redirect to the user index page" do
+      delete :destroy, :id => @user
+      response.should redirect_to(users_path)
+    end
+    
+    it "should display a confirmation message" do
+      delete :destroy, :id => @user
+      flash[:success] =~ /deleted/i
     end
   end
 end
