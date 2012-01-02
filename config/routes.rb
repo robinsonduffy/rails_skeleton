@@ -2,7 +2,9 @@ Stampson::Application.routes.draw do
   get "pages/home"
   root :to => "pages#home"
   
-  get "sessions/new"
+  get "login" => "sessions#new", :as => "login"
+  get "logout" => "sessions#destroy", :as => "logout"
+  resources :sessions, :only => [:create]
 
   resources :users, :except => [:show]
 

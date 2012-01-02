@@ -1,2 +1,12 @@
-%h1 Sessions#new
-%p Find me in app/views/sessions/new.html.haml
+= form_tag sessions_path do
+  %div.form-field
+    = label_tag :email
+    = text_field_tag :email, params[:email]
+  %div.form-field
+    = label_tag :password
+    = password_field_tag :password
+  %div.form-field
+    = check_box_tag :remember_me, 1, params[:remember_me]
+    = label_tag :remember_me
+  %div.form-actions
+    = submit_tag "Log In"
