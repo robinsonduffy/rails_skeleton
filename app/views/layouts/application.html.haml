@@ -8,6 +8,12 @@
     = javascript_include_tag "jquery_ujs.js"
     = csrf_meta_tag
   %body
+    %div#header
+      %ul#user-navigation
+        - if current_user
+          %li= link_to "Logout", logout_path
+        - else
+          %li= link_to "Login", login_path
     %div#content-wrapper
       %h1.title= (@title.nil?) ? @base_title : @title
       %div#flash-messages
