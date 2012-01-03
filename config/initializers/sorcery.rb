@@ -7,7 +7,7 @@ Rails.application.config.sorcery.submodules = [:remember_me]
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
   # -- core --
-  # config.not_authenticated_action = :not_authenticated              # what controller action to call for
+  config.not_authenticated_action = :access_denied              # what controller action to call for
                                                                       # non-authenticated users.
                                                                       # You can also override 'not_authenticated'
                                                                       # instead.
