@@ -1,2 +1,3 @@
-== Stampson Online Store
-A simple online stamp store for my father-in-law
+A skeleton rails app that includes basic user authorization (using sorcery).
+
+A starting point for my other projects.
