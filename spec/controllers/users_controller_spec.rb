@@ -197,11 +197,6 @@ describe UsersController do
         response.should have_selector("title", :content => "Edit User")
       end
     
-      it "should have the admin checkbox" do
-        get :edit, :id => @user
-        response.should have_selector("input", :type => 'checkbox', :name => 'user[admin]')
-      end
-    
       it "should have a delete link" do
         get :edit, :id => @user
         response.should have_selector("a", :content => "Delete User")
