@@ -1,11 +1,11 @@
 #!/bin/sh -e
 
 # Edit the following to change the name of the database user that will be created:
-APP_DB_USER=gravity_game
+APP_DB_USER=rails_skeleton
 APP_DB_PASS=dbpassword
 
 # Edit the following to change the name of the database that is created (defaults to the user name)
-APP_DB_NAME=gravity_game_dev
+APP_DB_NAME=rails_skeleton_dev
 
 # Edit the following to change the version of PostgreSQL that is installed
 PG_VERSION=9.4
